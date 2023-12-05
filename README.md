@@ -1,4 +1,4 @@
-# Hola web client
+# React side bar [stable]
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
