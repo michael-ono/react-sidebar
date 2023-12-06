@@ -5,6 +5,8 @@ import styled from 'styled-components';
 import { Link, useLocation } from "react-router-dom";
 import SidebarItems, { IconMappings } from "./SidebarItems";
 import { SidebarHeader } from "../SidebarHeader";
+import { StyleSheetManager } from 'styled-components';
+import isPropValid from '@emotion/is-prop-valid';
 
 function Sidebar({ defaultActive }) {
   const location = useLocation();
@@ -36,22 +38,24 @@ function Sidebar({ defaultActive }) {
 
   return (
     <>
-      <SidebarParent className="bg-[#4b1717]">
-        <div style={{ position: 'fixed' }}>
-          <SidebarHeader className="mb-8"/> 
-          {SidebarItems.map((item, index) => (
-            <Link to={item.route} key={item.name}>
-              <SidebarItem
-                active={index === activeIndex ? "true" : "false"}
-              >
-                {getIcon(item.icon)}
-                <p>{item.name}</p>
-              </SidebarItem>
-            </Link>
-          ))}
-        </div>
-        <div className="behind-the-scenes" />
-      </SidebarParent>
+      <StyleSheetManager shouldForwardProp={prop => isPropValid(prop)}>
+        <SidebarParent className="bg-[#4b1717]">
+          <div style={{ position: 'fixed' }}>
+            <SidebarHeader className="mb-8"/>
+            {SidebarItems.map((item, index) => (
+              <Link to={item.route} key={item.name}>
+                <SidebarItem
+                  active={index === activeIndex ? "true" : "false"}
+                >
+                  {getIcon(item.icon)}
+                  <p>{item.name}</p>
+                </SidebarItem>
+              </Link>
+            ))}
+          </div>
+          <div className="behind-the-scenes" />
+        </SidebarParent>
+      </StyleSheetManager>
     </>
   );
 }
